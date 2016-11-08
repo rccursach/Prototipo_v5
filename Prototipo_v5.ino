@@ -1,4 +1,4 @@
-#include "./sensors/DummySensor/DummySensor.h"
+#include "DummySensor.h"
 
 Dummy dummy(1.5, 3, 27);
 

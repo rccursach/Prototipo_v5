@@ -1,5 +1,4 @@
 #include "Sensor.h"
-
 /**
  * Constructor de la clase Sensor
  * param data_threshold : valor mínimo (variacion) para producir un cambio almacenable en las lecturas
@@ -7,15 +6,15 @@
  */
 Sensor::Sensor(float data_threshold, int buffer_size){
 	// Inicializar parametros
-	this.data_threshold = data_threshold;
-	this.buffer_size = buffer_size;
+	this->data_threshold = data_threshold;
+	this->buffer_size = buffer_size;
 	// inicializar valores de lecturas
-	this.last_data = NULL;
-	this.actual_data = NULL;
+	this->last_data = NULL;
+	this->actual_data = NULL;
 	// inicializar buffer de lecturas
-	int l = sizeof(this.actual_data) * this.buffer_size
-	this.readings_array = float[l];
-	this.readings_array_index = 0;
+	int l = sizeof(this->actual_data) * this->buffer_size;
+	this->readings_array = new float[l];
+	this->readings_array_index = 0;
 }
 
 /**
@@ -35,8 +34,8 @@ bool Sensor::readData(byte* byte_array) {
  * return bool : true si |actual_data - last_data| >= data_threshold
  */
 bool Sensor::compareThreshold() {
-	float d = (this.actual_data >= this.last_data) ? (this.actual_data - this.last_data) : (this.last_data - this.actual_data);
-	return (d >= this.data_threshold);
+	float d = (this->actual_data >= this->last_data) ? (this->actual_data - this->last_data) : (this->last_data - this->actual_data);
+	return (d >= this->data_threshold);
 }
 
 /**
@@ -45,9 +44,9 @@ bool Sensor::compareThreshold() {
  * debe ser definida en la clase derivada, en el metodo sensorInit() y debe retornar bool
  * si es inicializado con exito.
  */
-bool Sensor::init() final {
-	bool child_init = this.sensorInit();
-	this.readSensor();
-	this.last_data = (this.last_data == NULL && this.actual_data != null) ? this.actual_data : NULL;
-	return child_init && (this.last_data != NULL);
+bool Sensor::init() {
+	bool child_init = this->initSensor();
+	this->readSensor();
+	this->last_data = (!this->last_data && !this->actual_data) ? this->actual_data : NULL;
+	return child_init && this->last_data;
 }

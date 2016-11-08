@@ -1,7 +1,7 @@
 #include "DummySensor.h"
 
 Dummy::Dummy(float data_threshold, int buffer_size, int dummyness) : Sensor(data_threshold, buffer_size) {
-	this.dummyness = dummyness;
+	this->dummyness = dummyness;
 }
 
 float Dummy::readSensor() {

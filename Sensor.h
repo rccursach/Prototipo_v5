@@ -1,3 +1,9 @@
+#ifndef SENSOR_H
+#define SENSOR_H
+
+#include <Arduino.h>
+//#include <stdint.h>
+
 class Sensor {
 private:
 	float data_threshold;
@@ -17,3 +23,4 @@ public:
 	virtual bool init() final;
 	virtual bool readData(byte* byte_array);
 };
+#endif
